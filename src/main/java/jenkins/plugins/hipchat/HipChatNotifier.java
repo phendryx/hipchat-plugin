@@ -157,6 +157,13 @@ public class HipChatNotifier extends Notifier {
         private boolean notifyUnstable;
         private boolean notifyFailure;
         private boolean notifyBackToNormal;
+        private boolean notifyMatrixStart;
+        private boolean notifyMatrixSuccess;
+        private boolean notifyMatrixAborted;
+        private boolean notifyMatrixNotBuilt;
+        private boolean notifyMatrixUnstable;
+        private boolean notifyMatrixFailure;
+        private boolean notifyMatrixBackToNormal;
 
 
         @DataBoundConstructor
@@ -167,7 +174,14 @@ public class HipChatNotifier extends Notifier {
                                   boolean notifyNotBuilt,
                                   boolean notifySuccess,
                                   boolean notifyUnstable,
-                                  boolean notifyBackToNormal) {
+                                  boolean notifyBackToNormal,
+                                  boolean notifyMatrixStart,
+                                  boolean notifyMatrixAborted,
+                                  boolean notifyMatrixFailure,
+                                  boolean notifyMatrixNotBuilt,
+                                  boolean notifyMatrixSuccess,
+                                  boolean notifyMatrixUnstable,
+                                  boolean notifyMatrixBackToNormal) {
             this.room = room;
             this.startNotification = startNotification;
             this.notifyAborted = notifyAborted;
@@ -176,6 +190,13 @@ public class HipChatNotifier extends Notifier {
             this.notifySuccess = notifySuccess;
             this.notifyUnstable = notifyUnstable;
             this.notifyBackToNormal = notifyBackToNormal;
+            this.notifyMatrixStart = notifyMatrixStart;
+            this.notifyMatrixAborted = notifyMatrixAborted;
+            this.notifyMatrixFailure = notifyMatrixFailure;
+            this.notifyMatrixNotBuilt = notifyMatrixNotBuilt;
+            this.notifyMatrixSuccess = notifyMatrixSuccess;
+            this.notifyMatrixUnstable = notifyMatrixUnstable;
+            this.notifyMatrixBackToNormal = notifyMatrixBackToNormal;
         }
 
         @Exported
@@ -232,6 +253,41 @@ public class HipChatNotifier extends Notifier {
             return notifyBackToNormal;
         }
 
+        @Exported
+        public boolean getNotifyMatrixStart() {
+            return notifyMatrixStart;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixSuccess() {
+            return notifyMatrixSuccess;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixAborted() {
+            return notifyMatrixAborted;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixFailure() {
+            return notifyMatrixFailure;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixNotBuilt() {
+            return notifyMatrixNotBuilt;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixUnstable() {
+            return notifyMatrixUnstable;
+        }
+
+        @Exported
+        public boolean getNotifyMatrixBackToNormal() {
+            return notifyMatrixBackToNormal;
+        }
+        
         @Extension
         public static final class DescriptorImpl extends JobPropertyDescriptor {
             public String getDisplayName() {
@@ -252,7 +308,14 @@ public class HipChatNotifier extends Notifier {
                         sr.getParameter("hipChatNotifyNotBuilt") != null,
                         sr.getParameter("hipChatNotifySuccess") != null,
                         sr.getParameter("hipChatNotifyUnstable") != null,
-                        sr.getParameter("hipChatNotifyBackToNormal") != null);
+                        sr.getParameter("hipChatNotifyBackToNormal") != null,
+                        sr.getParameter("hipChatNotifyMatrixStart") != null,
+                        sr.getParameter("hipChatNotifyMatrixAborted") != null,
+                        sr.getParameter("hipChatNotifyMatrixFailure") != null,
+                        sr.getParameter("hipChatNotifyMatrixNotBuilt") != null,
+                        sr.getParameter("hipChatNotifyMatrixSuccess") != null,
+                        sr.getParameter("hipChatNotifyMatrixUnstable") != null,
+                        sr.getParameter("hipChatNotifyMatrixBackToNormal") != null);
             }
         }
     }

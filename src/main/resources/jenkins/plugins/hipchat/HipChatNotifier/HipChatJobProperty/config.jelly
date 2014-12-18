@@ -33,6 +33,36 @@
             <f:checkbox name="hipChatNotifyBackToNormal" value="true" checked="${instance.getNotifyBackToNormal()}"/>
         </f:entry>
 
+        <j:if test="${it.class.name!='hudson.matrix.MatrixConfiguration'}">
+            <f:entry title="Notify Matrix Build Start">
+                <f:checkbox name="hipChatNotifyMatrixStart" value="true" checked="${instance.getNotifyMatrixStart()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Aborted">
+                <f:checkbox name="hipChatNotifyMatrixAborted" value="true" checked="${instance.getNotifyMatrixAborted()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Failure">
+                <f:checkbox name="hipChatNotifyMatrixFailure" value="true" checked="${instance.getNotifyMatrixFailure()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Not Built">
+                <f:checkbox name="hipChatNotifyMatrixNotBuilt" value="true" checked="${instance.getNotifyMatrixNotBuilt()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Success">
+                <f:checkbox name="hipChatNotifyMatrixSuccess" value="true" checked="${instance.getNotifyMatrixSuccess()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Unstable">
+                <f:checkbox name="hipChatNotifyMatrixUnstable" value="true" checked="${instance.getNotifyMatrixUnstable()}"/>
+            </f:entry>
+
+            <f:entry title="Notify Matrix Back To Normal">
+                <f:checkbox name="hipChatNotifyMatrixBackToNormal" value="true" checked="${instance.getNotifyMatrixBackToNormal()}"/>
+            </f:entry>
+        </j:if>
+
     </f:section>
 
 </j:jelly>
