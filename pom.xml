@@ -11,8 +11,8 @@
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>hipchat</artifactId>
     <packaging>hpi</packaging>
-    <version>0.1.8</version>
-    <name>Jenkins HipChat Plugin</name>
+    <version>0.1.9-MWB</version>
+    <name>Malwarebytes Jenkins HipChat Plugin</name>
     <description>A Build status publisher that notifies channels on a HipChat server</description>
     <url>http://wiki.jenkins-ci.org/display/JENKINS/HipChat+Plugin</url>
 
@@ -36,10 +36,10 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/hipchat-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/hipchat-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/hipchat-plugin</url>
-        <tag>hipchat-0.1.8</tag>
+        <connection>scm:git:ssh://github.com/phendryx/hipchat-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/phendryx/hipchat-plugin.git</developerConnection>
+        <url>https://github.com/phendryx/hipchat-plugin</url>
+        <tag>hipchat-0.1.9-MWB</tag>
     </scm>
 
     <dependencies>

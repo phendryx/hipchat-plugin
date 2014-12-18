@@ -1,6 +1,7 @@
 package jenkins.plugins.hipchat;
 
 import hudson.Util;
+import hudson.matrix.MatrixConfiguration;
 import hudson.model.*;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.AffectedFile;
@@ -27,6 +28,11 @@ public class ActiveNotifier implements FineGrainedNotifier {
 
     private HipChatService getHipChat(AbstractBuild r) {
         AbstractProject<?, ?> project = r.getProject();
+        
+        if (project instanceof MatrixConfiguration) {
+            project = (AbstractProject<?, ?>) project.getParent();
+        }
+        
         String projectRoom = Util.fixEmpty(project.getProperty(HipChatNotifier.HipChatJobProperty.class).getRoom());
         return notifier.newHipChatService(projectRoom);
     }
@@ -58,6 +64,11 @@ public class ActiveNotifier implements FineGrainedNotifier {
 
     public void completed(AbstractBuild r) {
         AbstractProject<?, ?> project = r.getProject();
+
+        if (project instanceof MatrixConfiguration) {
+            project = (AbstractProject<?, ?>) project.getParent();
+        }
+
         HipChatNotifier.HipChatJobProperty jobProperty = project.getProperty(HipChatNotifier.HipChatJobProperty.class);
         Result result = r.getResult();
         AbstractBuild<?, ?> previousBuild = project.getLastBuild().getPreviousBuild();
