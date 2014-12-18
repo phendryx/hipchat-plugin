@@ -14,7 +14,7 @@
     <version>0.1.9-MWB</version>
     <name>Malwarebytes Jenkins HipChat Plugin</name>
     <description>A Build status publisher that notifies channels on a HipChat server</description>
-    <url>http://wiki.jenkins-ci.org/display/JENKINS/HipChat+Plugin</url>
+    <url>https://github.com/phendryx/hipchat-plugin</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

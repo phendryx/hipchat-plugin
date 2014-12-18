@@ -65,20 +65,35 @@ public class ActiveNotifier implements FineGrainedNotifier {
     public void completed(AbstractBuild r) {
         AbstractProject<?, ?> project = r.getProject();
 
+        boolean isMatrixProject = false;
         if (project instanceof MatrixConfiguration) {
+            isMatrixProject = true;
             project = (AbstractProject<?, ?>) project.getParent();
         }
-
+        
         HipChatNotifier.HipChatJobProperty jobProperty = project.getProperty(HipChatNotifier.HipChatJobProperty.class);
         Result result = r.getResult();
         AbstractBuild<?, ?> previousBuild = project.getLastBuild().getPreviousBuild();
         Result previousResult = (previousBuild != null) ? previousBuild.getResult() : Result.SUCCESS;
-        if ((result == Result.ABORTED && jobProperty.getNotifyAborted())
+
+        boolean sendNotification = false;
+        if (isMatrixProject) {
+            sendNotification = (result == Result.ABORTED && jobProperty.getNotifyMatrixAborted())
+                || (result == Result.FAILURE && jobProperty.getNotifyMatrixFailure())
+                || (result == Result.NOT_BUILT && jobProperty.getNotifyMatrixNotBuilt())
+                || (result == Result.SUCCESS && previousResult == Result.FAILURE && jobProperty.getNotifyMatrixBackToNormal())
+                || (result == Result.SUCCESS && jobProperty.getNotifyMatrixSuccess())
+                || (result == Result.UNSTABLE && jobProperty.getNotifyMatrixUnstable());              
+        } else {
+            sendNotification = (result == Result.ABORTED && jobProperty.getNotifyAborted())
                 || (result == Result.FAILURE && jobProperty.getNotifyFailure())
                 || (result == Result.NOT_BUILT && jobProperty.getNotifyNotBuilt())
                 || (result == Result.SUCCESS && previousResult == Result.FAILURE && jobProperty.getNotifyBackToNormal())
                 || (result == Result.SUCCESS && jobProperty.getNotifySuccess())
-                || (result == Result.UNSTABLE && jobProperty.getNotifyUnstable())) {
+                || (result == Result.UNSTABLE && jobProperty.getNotifyUnstable());            
+        }
+        
+        if (sendNotification) {
             getHipChat(r).publish(getBuildStatusMessage(r), getBuildColor(r));
         }
     }
