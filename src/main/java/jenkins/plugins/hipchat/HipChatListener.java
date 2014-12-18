@@ -1,6 +1,7 @@
 package jenkins.plugins.hipchat;
 
 import hudson.Extension;
+import hudson.matrix.MatrixConfiguration;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
@@ -43,7 +44,7 @@ public class HipChatListener extends RunListener<AbstractBuild> {
     public void onFinalized(AbstractBuild r) {
          getNotifier(r.getProject()).finalized(r);
          super.onFinalized(r);
-    }
+    }   
 
     @SuppressWarnings("unchecked")
     FineGrainedNotifier getNotifier(AbstractProject project) {
